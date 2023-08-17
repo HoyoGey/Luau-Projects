@@ -4,10 +4,9 @@
   <img src="https://github.com/HoyoGey/Luau-Projects/assets/117149371/8a6fd340-95bd-443c-8e9d-22f4ffe2a74b" alt="Preview Image"/>
 </div>
 
-<p align="center">Preview UI Lib. [Full Example](https://raw.githubusercontent.com/HoyoGey/Luau-Projects/main/Ui%20Librarys/Lapse/Example.lua)</p>
-
 ## Introduction
 The Lapse UI library is designed to create user interfaces (UI) for Roblox games. It provides various components such as tabs, buttons, toggles, sliders, dropdowns, etc., which can be easily integrated into your game's interface.
+[Full Example](https://raw.githubusercontent.com/HoyoGey/Luau-Projects/main/Ui%20Librarys/Lapse/Example.lua)
 
 ## Getting Started
 To use the library in your script, you need to load it first. Here is an example of how to do that:
