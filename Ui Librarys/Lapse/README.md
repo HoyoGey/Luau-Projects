@@ -1,7 +1,7 @@
 # Lapse UI Documentation
 
 <div align="center">
-  <img src="https://github.com/HoyoGey/Luau-Projects/assets/117149371/8a6fd340-95bd-443c-8e9d-22f4ffe2a74b" alt="Preview Image"/>
+  <img src="https://github.com/HoyoGey/Luau-Projects/assets/117149371/de29e57e-b71a-45c4-9b22-c94d713fffd9" alt="Preview Image"/>
 </div>
 
 ## Introduction
