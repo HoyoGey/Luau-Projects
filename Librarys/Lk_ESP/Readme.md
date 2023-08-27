@@ -10,8 +10,8 @@ The ESP (Extra Sensory Perception) module is a script that allows you to create 
 ### Installation
 To use the ESP module, follow these steps:
 1. Copy the entire code provided above.
-2. Create a new Script object in Roblox Studio.
-3. Paste the code into the Script object.
+2. Create a new Script object in Roblox Studio or in Exploit.
+3. Paste the code into the Script object or Editor.
 
 ### Initialization
 To initialize and start using the ESP module, follow these steps:
