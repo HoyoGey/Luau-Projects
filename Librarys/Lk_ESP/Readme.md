@@ -1,151 +1,136 @@
-# Documentation for ESP Library/Module
+# ESP Module Documentation
 
-The Lua code provided is a script that creates an ESP (Extra Sensory Perception) module in Roblox. The module allows the user to create visual indicators, or "ESP", for game objects such as players and parts.
+![image](https://github.com/HoyoGey/Luau-Projects/assets/117149371/abf33e6a-d2b0-4c67-8d8d-4b71301c6aa4)
+
+## Introduction
+The ESP (Extra Sensory Perception) module is a script that allows you to create visual indicators in your Roblox game. It can be used to highlight and display information about certain objects or players in the game.
 
 ## Usage
-To use the ESP module, first require it into your script using `local ESP = loadstring(game:HttpGet("https://api-sirclub.onrender.com/scripts/raw/LK_Esp.lua"), true)()`.
 
-### Creating an ESP Object
-To create a new instance of the ESP object, call the `addESP` method on the `ESP` module. This method accepts two arguments: `a` and `settings`.
+### Installation
+To use the ESP module, follow these steps:
+1. Copy the entire code provided above.
+2. Create a new Script object in Roblox Studio.
+3. Paste the code into the Script object.
 
-- **Parameter**: `a`
-  - Type: string or userdata
-  - Description: Specifies what type of objects to track with the created ESP.
-    - If set to "player", then the created ESP will track players in the game.
-	- If set to a userdata object (e.g., Model), then the created ESP will track child objects of that userdata.
-    
-- **Parameter**: `settings`
-  - Type: table (optional)
-  - Description: Optional settings for customizing how the ESP appears and functions. Defaults are used if not specified.
+### Initialization
+To initialize and start using the ESP module, follow these steps:
 
-#### Example:
+#### Step 1: Importing and creating an instance of the module:
 ```lua
-local myEsp = ESP:addESP("player", {
-	Color = Color3.new(1, 0, 0),
-	tag = true,
-	distance = true,
-	nolplr = true,
-	teamcolor = false,
-	outlineSameAsFill = false,
-	customColor = nil,
-	refreshTime = 1,
-	customTag= nil
+local ESP = loadstring(game:HttpGet("https://api-sirclub.onrender.com/scripts/raw/LK_Esp.lua"), true)()
+local espInstance = ESP:addESP(a, settings)
+```
+- Replace `path.to.espModule` with the actual path where you have placed or saved this module script.
+- The `a` parameter should be either "player" or a userdata representing a model containing objects you want to apply ESP on.
+- The `settings` parameter is optional and allows you to customize various aspects of how the ESP works.
+
+#### Step 2: Adding objects to track:
+Once you have created an instance of `ESP`, you can add objects to track by calling its `AddObject(object, title)` method:
+```lua
+espInstance:AddObject(object, title)
+```
+- The `object` parameter represents any BasePart or Model object that needs highlighting/displaying.
+- The `title` parameter is optional and represents a custom title/tag for the object being tracked.
+
+#### Step 3: Changing settings:
+You can change various settings related to how your ESP appears by calling its `ChangeSettings(newSettings)` method:
+```lua
+espInstance:ChangeSettings(newSettings)
+```
+- The `newSettings` table contains key-value pairs where each key represents a setting property and its corresponding value is the new value you want to set.
+
+#### Step 4: Enabling or disabling the ESP:
+You can enable or disable the ESP by calling its `Value(val)` method:
+```lua
+espInstance:Value(true) -- Enables the ESP
+espInstance:Value(false) -- Disables the ESP
+```
+- The `val` parameter should be either `true` or `false`.
+
+### Example Usage
+
+Here's an example usage of this module:
+
+```lua
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Importing and creating an instance of the module
+local ESP = loadstring(game:HttpGet("https://api-sirclub.onrender.com/scripts/raw/LK_Esp.lua"), true)()
+local espInstance = ESP:addESP("player")
+
+-- Adding objects to track
+for _, player in ipairs(Players:GetPlayers()) do
+    if player ~= LocalPlayer then
+        espInstance:AddObject(player.Character, player.Name)
+    end
+end
+
+-- Changing settings (optional)
+espInstance:ChangeSettings({
+    Color = Color3.new(0, 1, 0), -- Change highlight color to green 
+    tag = true, -- Show tags for tracked players 
 })
+
+-- Enabling the ESP 
+espInstance:Value(true)
 ```
 
-### Adding Objects to Track
-After creating an instance of an EspObject using addESP(), you can add specific game objects to be tracked by calling its AddObject() method.
+## API Reference
 
-#### Method Signature:
-```lua
-myEsp:AddObject(object [, title])
-```
-##### Parameters:
-- **Parameter**: `object`
-   - Type: userdata
-   - Description: The game object to be tracked by the ESP.
-   
-- **Parameter**: `title`
-  - Type: string (optional)
-  - Description: A custom title for the tracked object. If not specified, the name of the object will be used as the title.
+### Methods
 
-#### Example:
-```lua
-local player = game:GetService("Players").LocalPlayer
-myEsp:AddObject(player.Character, "My Player")
-```
+#### addESP(a [, settings])
+Creates and returns an instance of the ESP module.
+- Parameters:
+  - `a`: Represents what type of objects you want to apply ESP on. It can be either "player" or a userdata representing a model containing objects.
+  - `[settings]`: An optional table that allows you to customize various aspects of how your ESP works. Refer to Settings section for more details.
+- Returns:
+  - A new instance of `ESP`.
 
-### Removing Objects from Tracking
-To stop tracking a specific game object with an ESP instance, call its RemoveObject() method.
+#### AddObject(object [, title])
+Adds an object to track with its optional custom title/tag.
+- Parameters:
+  - `object`: The object (BasePart or Model) to be tracked.
+  - `[title]`: An optional custom title/tag for the object being tracked.
 
-#### Method Signature:
-```lua
-myEsp:RemoveObject(object)
-```
-##### Parameters:
-- **Parameter**: `object`
-   - Type: userdata
-   - Description: The game object that should no longer be tracked by the ESP.
+#### RemoveObject(object)
+Removes a previously added object from tracking.
+- Parameters:
+  - `object`: The object (BasePart or Model) to be removed from tracking.
 
-#### Example:
-```lua
-local player = game:GetService("Players").LocalPlayer
-myEsp:RemoveObject(player.Character)
-```
+#### ChangeSettings(newSettings)
+Changes the settings of your ESP instance.
+- Parameters:
+  - `newSettings`: A table containing key-value pairs representing the new values for different settings properties. Refer to Settings section for more details.
 
-### Changing Settings
+#### Value(val)
+Enables or disables the ESP.
+- Parameters:
+  - `val`: A boolean value indicating whether to enable (`true`) or disable (`false`) the ESP.
 
-You can change various settings of an existing EspObject using its ChangeSettings() method.
 
-#### Method Signature:
-```lua 
-myEsp:ChangeSettings(newSettings)
-```
+### Settings
 
-##### Parameters:
+The following settings can be customized by passing them as key-value pairs in the `settings` parameter when creating an instance of `ESP` module:
 
-- **Parameter**: `newSettings`
-  - Type : table (optional) 
-  - Description : A table containing new values for different settings. Only include those settings you wish to modify. 
+| Setting              | Default Value         | Description                                                  |
+| -------------------- | --------------------- | ------------------------------------------------------------ |
+| Color                | Color3.new(1, 1, 1)   | The color used for highlighting objects.                     |
+| outline              | true                  | Specifies whether outlines should be displayed around objects. |
+| tag                  | false                 | Specifies whether tags/titles should be displayed above objects. |
+| distance             | false                 | Specifies whether distances should be displayed below objects' tags. |
+| nolplr               | true                  |\ Whether local player's character should not have an ESP applied on it.|
+\ teamcolor            |\ false                \|\ If set to true, uses players' TeamColor property as their highlight color.\|
+\ outlineSameAsFill    \|\ false             \\\ If set to true, uses same color as fill color for outlines.\|
+\ customColor          \| nil               \\A function that takes an object and returns a custom highlight color.\|
+\ refreshTime          \|\ 1               \\The time (in seconds) between each update of the ESP.|
+\ customTag            \| nil                 |\ A function that takes an object and returns a custom tag/title for it.\|
 
-The following are valid keys in `newSettings` and their corresponding meanings:
-
-| Key                 | Value type          | Default value        | Description                                                                                                                          |
-|---------------------|---------------------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Color               | Color3              | nil                  | Specifies color of highlight on objects being tracked                                                                                |
-| outline             | boolean             | true                 | Whether or not to display an outline around highlights                                                                              |
-| tag                 | boolean             | false                | Whether or not to display a tag above each highlighted object                                                                        |
-| distance            | boolean             | false                | Whether or not to display the distance between the player and each highlighted object                                               |
-| nolplr              | boolean             | true                 | Whether or not to exclude LocalPlayer from being tracked                                                                             |
-| teamcolor           | boolean             | false                | Whether or not to use team color for highlights. This setting overrides the 'Color' setting if a player's team color is available    |
-| outlineSameAsFill   | boolean             | false                | Specifies whether the outline color should be same as fill color                                                                     |
-| customColor         | function            |-                     |-                                                                                                                                     |
-| refreshTime        	| number             	| 1                   	|-                                                                                                                                     |
-  - **Note**: The `customColor` key expects a function that takes an object as input parameter and returns a Color3 value.
-
-#### Example:
-```lua 
-myEsp:ChangeSettings({
-	Color = Color3.new(0, 1, 0),
-	distance = true,
-	outline = true
-})
-```
-
-### Enabling/Disabling ESP
-
-You can enable/disable all highlights and tags created by an EspObject using its Value() method.
-
-#### Method Signature:
-
-```lua 
-myEsp:Value(val)
-```
-##### Parameters:
-
-- **Parameter**: `val`
-  - Type : boolean
-  - Description : Set val to true/false to enable/disable highlighting of objects being tracked.
-  
-#### Example:
-```lua 
-myEsp:Value(false) -- Disables highlighting of objects
-```
-
-### Destroying ESP Object:
-
-To stop tracking all objects and remove any associated GUI elements, call the Destroy() method on an EspObject instance.
-
-#### Method Signature:
-```lua
-myEsp:Destroy()
-```
-
-#### Example:
-```lua
-myEsp:Destroy()
-```
+Note: If you set `teamcolor` to true, the `customColor` setting will be overridden and all players' TeamColor property will be used as their highlight color.
 
 ## Conclusion
+The ESP module allows you to easily create visual indicators in your Roblox game. By following the instructions provided in this documentation, you can add highlighting and display information about objects or players in your game. Feel free to experiment with different settings to achieve the desired effect.
 
-The provided Lua script creates an ESP module in Roblox that allows you to track and highlight game objects. By following the usage instructions outlined above, you can effectively use this module in your own Roblox projects.
+If you have any further questions or need assistance, feel free to ask!
