@@ -77,24 +77,12 @@ function update(esp, object, settings, hl, ui)
 end
 
 function ESP:ToEsp(object, sourceEsp, targetEsp)
-    if not object or not sourceEsp or not targetEsp then
-        return
-    end
+    	if not object or not sourceEsp or not targetEsp then
+        	return
+    	end
 
-    local hl = sourceEsp.Folder:FindFirstChild("Highlight_" .. object.Name)
-    local ui = sourceEsp.Folder:FindFirstChild("Tag_" .. object.Name)
-
-    if hl and ui then
-        local title = ui.Title.Text
-
-        sourceEsp:RemoveObject(object)
-
-        targetESP:AddObject(object, title)
-        
-        print("Successfully transferred object to new ESP.")
-    else
-        print("Error transferring object. Object may not exist in the original ESP.")
-      end
+	sourceEsp:RemoveObject(object)
+	targetESP:AddObject(object, title)
 end
 
 function ESP:addESP(a, settings)
