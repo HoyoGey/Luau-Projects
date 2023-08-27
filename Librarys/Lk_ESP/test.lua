@@ -36,6 +36,18 @@ function update(esp, object, settings, hl, ui)
     distance = part and plr:DistanceFromCharacter(part.Position)
     distance = distance and math.floor(distance * 0.28)
 
+    for obj, _ in pairs(esp.espList) do 
+		if obj ~= object then
+			local p = getBasePart(obj)			
+			if p and p.Parent == object.Parent then
+                if self.espList[obj] then
+                    self.espList[obj].hl:Destroy()
+                    self.espList[obj].ui:Destroy()
+                    self.espList[obj] = nil
+                end
+			end
+		end										   
+	end
 
     local color = settings.customColor and settings.customColor(object) or settings.Color or Color3.fromRGB(255, 0, 0)
 
@@ -62,6 +74,27 @@ function update(esp, object, settings, hl, ui)
         ui:Destroy()
         esp.espList[object] = nil
     end
+end
+
+function ESP:ToEsp(object, sourceEsp, targetEsp)
+    if not object or not sourceEsp or not targetEsp then
+        return
+    end
+
+    local hl = sourceEsp.Folder:FindFirstChild("Highlight_" .. object.Name)
+    local ui = sourceEsp.Folder:FindFirstChild("Tag_" .. object.Name)
+
+    if hl and ui then
+        local title = ui.Title.Text
+
+        sourceEsp:RemoveObject(object)
+
+        targetESP:AddObject(object, title)
+        
+        print("Successfully transferred object to new ESP.")
+    else
+        print("Error transferring object. Object may not exist in the original ESP.")
+      end
 end
 
 function ESP:addESP(a, settings)
