@@ -28,7 +28,7 @@ This function creates a new Fluent window with specified options.
   - `TabWidth` (number) : The width of each tab in pixels.
   - `Size` (UDim2 object) : The size of the entire window.
   - `Acrylic` (boolean) : Whether to enable acrylic effect or not.
-  - `Theme` (string) : The theme color scheme ("Dark" or "Light").
+  - `Theme` (string) : The theme color scheme ("Dark" or "Light" or "Rose" or "Aqua" or "Darker" or "Amethyst").
   - `MinimizeKey`(Enum.KeyCode or nil): Optional keybind to minimize/maximize the window.
 
 
