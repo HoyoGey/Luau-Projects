@@ -1,3 +1,5 @@
+local urlGitHub = "https://raw.githubusercontent.com/HoyoGey/Luau-Projects/main/test"
+
 _G.YodeW = {}
 local storage = _G.YodeW
 function registerStorage(path: string)
