@@ -1,3 +1,2 @@
-
-require(script.functions)
-require(script.ui)
+require("functions.lua")
+require("ui.lua")
