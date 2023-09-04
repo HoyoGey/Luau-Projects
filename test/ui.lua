@@ -1,5 +1,5 @@
 local Root = script
-local Func = require(Root.function)
+local Func = _G.YodeW.requireGit("/functions.lua")
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("TITLE", "DarkTheme")
