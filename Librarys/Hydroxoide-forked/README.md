@@ -1,10 +1,10 @@
 ## Script
 ```lua
-local owner = "Upbolt"
-local branch = "revision"
+local owner = "HoyoGey"
+local branch = "main"
 
 local function webImport(file)
-    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
+    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Luau-Projects/%s/Librarys/Hydroxoide-forked/%s.lua"):format(owner, branch, file)), file .. '.lua')()
 end
 
 webImport("init")
